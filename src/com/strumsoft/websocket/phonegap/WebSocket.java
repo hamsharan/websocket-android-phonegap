@@ -2,7 +2,7 @@
  * Copyright (c) 2010 Nathan Rajlich (https://github.com/TooTallNate)
  * Copyright (c) 2010 Animesh Kumar (https://github.com/anismiles)
  * Copyright (c) 2010 Strumsoft (https://strumsoft.com)
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -11,10 +11,10 @@
  * copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following
  * conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -53,7 +53,7 @@ import android.webkit.WebView;
  * <var>onOpen</var>, <var>onClose</var>, <var>onError</var> and
  * <var>onMessage</var>. An instance can send messages to the server via the
  * <var>send</var> method.
- * 
+ *
  * @author Animesh Kumar
  */
 public class WebSocket implements Runnable {
@@ -210,9 +210,9 @@ public class WebSocket implements Runnable {
 
 	/**
 	 * Constructor.
-	 * 
+	 *
 	 * Note: this is protected because it's supposed to be instantiated from {@link WebSocketFactory} only.
-	 * 
+	 *
 	 * @param appView
 	 *            {@link android.webkit.WebView}
 	 * @param uri
@@ -250,7 +250,7 @@ public class WebSocket implements Runnable {
 	// //////////////////////////////////////////////////////////////////////////////////////
 	/**
 	 * Starts a new Thread and connects to server
-	 * 
+	 *
 	 * @throws IOException
 	 */
 	public Thread connect() throws IOException {
@@ -312,7 +312,7 @@ public class WebSocket implements Runnable {
 
 	/**
 	 * Sends <var>text</var> to server
-	 * 
+	 *
 	 * @param text
 	 *            String to send to server
 	 */
@@ -335,7 +335,7 @@ public class WebSocket implements Runnable {
 
 	/**
 	 * Called when an entire text frame has been received.
-	 * 
+	 *
 	 * @param msg
 	 *            Message from websocket server
 	 */
@@ -389,7 +389,7 @@ public class WebSocket implements Runnable {
 	/**
 	 * Builds text for javascript engine to invoke proper event method with
 	 * proper data.
-	 * 
+	 *
 	 * @param event
 	 *            websocket event (onOpen, onMessage etc.)
 	 * @param msg
@@ -397,6 +397,9 @@ public class WebSocket implements Runnable {
 	 * @return
 	 */
 	private String buildJavaScriptData(String event, String msg) {
+		if (msg == null){
+			msg = ""
+		}
 		String _d = "javascript:WebSocket." + event + "(" + "{" + "\"_target\":\"" + id + "\"," + "\"data\":'" + msg.replaceAll("'", "\\\\'")
 				+ "'" + "}" + ")";
 		return _d;
