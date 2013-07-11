@@ -482,12 +482,14 @@ public class WebSocket implements Runnable {
 		String origin = "*"; // TODO: Make 'origin' configurable
 		String request = "GET " + path + " HTTP/1.1\r\n" + "Upgrade: WebSocket\r\n" + "Connection: Upgrade\r\n"
 				+ "Host: " + host + "\r\n" + "Origin: " + origin + "\r\n";
+		request += "User-Agent: " + this.appView.getSettings().getUserAgentString() + "\r\n";
 
 		// Add random keys for Draft76
 		if (this.draft == Draft.DRAFT76) {
 			request += "Sec-WebSocket-Key1: " + this._randomKey() + "\r\n";
 			request += "Sec-WebSocket-Key2: " + this._randomKey() + "\r\n";
 			request += "\r\n";
+
 			this.key3 = new byte[8];
 			(new Random()).nextBytes(this.key3);
 
